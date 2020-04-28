@@ -1,0 +1,66 @@
+#/bin/zsh
+
+# Store arguments.
+COMMAND=$1
+PATH=$2
+
+# Display help text.
+function help() {
+  echo
+  echo "dropbox-ignore - Ignore files and folders in Dropbox"
+  echo
+  echo "USAGE:"
+  echo
+  echo "  dropbox-ignore add path/to/file/or/folder"
+  echo
+  echo "COMMANDS:"
+  echo
+  echo "  add     Add the given file or folder to Dropbox's list of ignores"
+  echo "  rm      Remove the given file or folder to Dropbox's list of ignores"
+  echo
+
+}
+
+# Require command args or show help.
+function requireArgs() {
+  if [ -z "$COMMAND" ]; then
+    help
+    exit 1
+  fi
+}
+
+# Start ignoring a give file/folder.
+function addIgnore() {
+  echo "Ignoring: $PATH"
+  /usr/bin/xattr -w com.dropbox.ignored 1 $PATH
+}
+
+# Stop ignoring a give file/folder.
+function removeIgnore() {
+  echo "Stop ignoring: $PATH"
+  /usr/bin/xattr -w com.dropbox.ignored 0 $PATH
+}
+
+function handleCommands() {
+  # Require know commands
+  if [[ "$COMMAND" != "add" && "$COMMAND" != "rm" ]]; then
+    help
+    exit 1
+  fi
+
+  if [ "$COMMAND" == "add" ]; then
+    addIgnore
+  fi
+  if [ "$COMMAND" == "rm" ]; then
+    removeIgnore
+  fi
+
+}
+
+function main() {
+  requireArgs
+  handleCommands
+}
+
+# Run dropbox-ignore
+main
