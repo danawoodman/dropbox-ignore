@@ -16,9 +16,20 @@ This will download the `dropbox-ignore` shell script to `/usr/local/bin`.
 
 ## Usage
 
+Ignore all `node_modules` (or any other file/folder):
+
+```bash
+dropbox-ignore all node_modules
+```
+
+Other examples:
+
 ```bash
 # Ignore a file/folder:
 dropbox-ignore add path/to/file/or/dir
+
+# Recursively ignore all files/folders matching the given name:
+dropbox-ignore all node_modules .git
 
 # Stop ignoring a file/folder
 dropbox-ignore rm path/to/file/or/dir
