@@ -7,8 +7,10 @@ Only supports MacOS right now, but PRs are welcome to add Linux/Win support.
 ## Install
 
 ```bash
-# coming soon...
+curl https://raw.githubusercontent.com/danawoodman/dropbox-ignore/master/install.sh | bash
 ```
+
+This will download the `dropbox-ignore` shell script to `/usr/local/bin`.
 
 ## Usage
 
