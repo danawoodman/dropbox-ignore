@@ -41,13 +41,30 @@ function addIgnore() {
 
 function ignoreAll() {
   echo "Ignoring all files/folders matching pattern: $1"
-  $BIN_ROOT/find . -name "$1" | $BIN_ROOT/xargs $BIN_ROOT/xattr -w com.dropbox.ignored 1
+
+  matches=()
+  while IFS= read -d $'\0' -r file; do
+    matches=("${matches[@]}" "$file")
+  done < <(find "$1" -print0)
+
+  echo "${matches[@]}"
+
+  # matches=()
+  # while IFS= read -r -d $'\0'; do
+  #   matches+=("$REPLY")
+  # done < <(find . -name "$1" -print0)
+
+  for i in "${matches[@]}"; do
+    echo $i
+  done
+
+  # $BIN_ROOT/find . -name "$1" | $BIN_ROOT/xargs $BIN_ROOT/xattr -w com.dropbox.ignored 1
 }
 
 # Stop ignoring a give file/folder.
 function removeIgnore() {
   echo "Stop ignoring: $1"
-  $BIN_ROOT/xattr -w com.dropbox.ignored 0 $1
+  $BIN_ROOT/xattr -d com.dropbox.ignored $1
 }
 
 function handleCommands() {
