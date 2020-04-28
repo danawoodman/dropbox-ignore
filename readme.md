@@ -2,7 +2,9 @@
 
 > Ignore files and folders in Dropbox based on [Dropbox's half-assed](https://help.dropbox.com/files-folders/restore-delete/ignored-files) ignore support
 
-Only supports MacOS right now, but PRs are welcome to add Linux/Win support.
+Only supports MacOS right now, but PRs are welcome to add Linux/Win support!
+
+Maybe one day Dropbox will support a `.dropboxignore` file? One can only dream right? 🤔
 
 ## Install
 
